@@ -229,4 +229,8 @@ if __name__ == '__main__':
     for index, row in authordf.iterrows():
         value = str(row['Message'])
         msgList.append(value)
+<<<<<<< HEAD
     findError(i, msgList,questions)
+=======
+    findError(i, msgList,questions)
+>>>>>>> 14e0635ba2c6d615eb92a99ca1bc5bf339004da4
