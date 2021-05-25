@@ -7,8 +7,51 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from tqdm import tqdm
 import numpy as np
+from fpdf import FPDF, fpdf
 
+def Individual(author,msgList,questions,ans,accuracy,errorCategory,indErr):
+    asgnList = []
+    for i in range(len(ans)):
+        asgnList.append("Asgn"+str(ans[i]))
+    plt.plot(asgnList, accuracy, marker='.',markersize=15)
+    plt.title('Assignment Evaluation', fontsize=14)
+    plt.xlabel('Assignments', fontsize=14)
+    plt.ylabel('Accuracy', fontsize=14)
+    plt.savefig('Accuracy.png', dpi=300, bbox_inches='tight')
+    plt.clf()
 
+    y = np.array([len(ans),len(questions)-len(ans)])
+    mylabels = ["Submitted", "Not Submitted"]
+    plt.pie(y, labels=mylabels)
+    plt.legend()
+    plt.savefig('Attempted.png', dpi=300, bbox_inches='tight')
+    plt.clf()
+    mylabels = []
+    lst=[]
+    for i in errorCategory:
+        lst.append(errorCategory[i])
+        mylabels.append(i+" ("+str(errorCategory[i])+"/"+str(indErr)+")")
+
+    y = np.array(lst)
+    plt.pie(y, labels=mylabels)
+    plt.savefig('errorType.png', dpi=300, bbox_inches='tight')
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font("Arial", size=30)
+    pdf.cell(200, 10, txt="Student Analysis Report", ln=1, align="C")
+    variable = asgnList
+    variable2 = str(len(questions))
+    pdf.set_font("Arial", size=10)
+    pdf.cell(200, 10, txt="Name :-" + author, ln=3, align="L")
+    pdf.cell(200, 10, txt="Total Number of Assignments :-  " + variable2, ln=4, align="L")
+    pdf.cell(200, 10, txt="Assignments Attempted :-  " + str(variable) , ln=5, align="L")
+    pdf.cell(200, 10, txt="Please find below the evaluation charts for the inputted user.", ln=6, align="L")
+    pdf.image('Accuracy.png', x = 50, y = 70, w = 100, h = 80, type = '', link = '')
+    pdf.image('Attempted.png', x=10, y=160, w=80, h=80, type='', link='')
+    pdf.image('errorType.png', x=120, y=160, w=80, h=80, type='', link='')
+    pdf.output(author+'.pdf')
+def All():
+    return
 def findError(author, msgList,questions):
     f = open(author + ".txt", "w+")
     f.write("Submission by: " + author)
@@ -23,6 +66,7 @@ def findError(author, msgList,questions):
     cnt=0
     accuracy=[]
     errorCategory={}
+    indErr = 0
     for s in range(len(questions)):
         string="\n\nAssignment "+str(s+1)+":" + questions[s].split(" ",1)[1]
         f.write(string)
@@ -35,6 +79,8 @@ def findError(author, msgList,questions):
             errors = {}
             matches = tool.check(line)
             i = i + len(matches)
+            indErr += i
+            print(100-100*(len(matches)/len(line.split())))
             accuracy.append(100-100*(len(matches)/len(line.split())))
             for mistake in matches:
                 c += 1
@@ -55,25 +101,8 @@ def findError(author, msgList,questions):
             f.write("\n\nYou did not attempt this assignment.")
         f.write("\n----------x----------x---------")
     f.close()
-    asgnList = []
-    # plt.plot(asgnList, accuracy)
-    # plt.title('Assignment Ealuation', fontsize=14)
-    # plt.xlabel('Assignments', fontsize=14)
-    # plt.ylabel('Accuracy', fontsize=14)
-    # plt.show()
-    # y = np.array([len(ans),len(questions)-len(ans)])
-    # mylabels = ["Submitted", "Not Submitted"]
-    # plt.pie(y, labels=mylabels)
-    # plt.show()
+    Individual(author, msgList, questions, ans, accuracy, errorCategory, indErr)
 
-    mylabels = []
-    lst=[]
-    for i in errorCategory:
-        mylabels.append(i)
-        lst.append(errorCategory[i])
-    y = np.array(lst)
-    plt.pie(y, labels=mylabels)
-    plt.show()
 
 
 def split_text(filename):
@@ -146,7 +175,7 @@ def startsWithDateTime(s):
     return False
 
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     parsedData2 = []
     questions=[]
     authorsList ={}
@@ -176,10 +205,8 @@ if __name__ == '__main__':
                 messageBuffer.append(message)
             else:
                 messageBuffer.append(line)
-    #print(questions)
     df2 = pd.DataFrame(parsedData2, columns=['Date', 'Time', 'Author', 'Message'])
     df2.head()
-    #print(df2)
     desired_width = 320
     pd.set_option('display.width', desired_width)
     np.set_printoptions(linewidth=desired_width)
@@ -196,11 +223,10 @@ if __name__ == '__main__':
     #         value = str(row['Message'])
     #         msgList.append(value)
     #     findError(i, msgList,questions)
-    i='Gitansh Raj Iiitd'
+    i='Maa'
     authordf = df2.loc[df2['Author'] == i]
     msgList=[]
     for index, row in authordf.iterrows():
         value = str(row['Message'])
         msgList.append(value)
     findError(i, msgList,questions)
-
