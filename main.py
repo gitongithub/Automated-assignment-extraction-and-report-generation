@@ -40,39 +40,11 @@ def split_text(filename):
     chatText = chat.read()
     return chatText.splitlines()
 
-
-def groupByHour(AM, PM):
-    time_groups = {}
-
-    for i in range(24):
-        time_groups[str(i)] = 0
-
-    for time in AM:
-        current_hour = int(time.split(":")[0])
-
-        if current_hour == 12:
-            current_hour = 0
-
-        current_hour = str(current_hour)
-        time_groups[current_hour] += 1
-
-    for time in PM:
-        current_hour = int(time.split(":")[0])
-
-        if current_hour == 24:
-            current_hour = 12
-        current_hour = str(current_hour)
-        time_groups[current_hour] += 1
-    return time_groups
-
-
-
 def distributeByAmPm(linesText):
     timeRegex = re.compile("\d+\/\d+\/\d+, (\d+\:\d+)")
 
     AM, PM = [], []
     for index, line in tqdm(enumerate(linesText)):
-#         print(index)
         matches = re.findall(timeRegex, line)
         if (len(matches) > 0):
             match = datetime.datetime.strptime(
@@ -104,7 +76,17 @@ def getDataPoint(line):
         author = None
     return date, time, author, message
 
-
+def typeOfMessage(message):
+    qPattern = 'Q[0-9]{1,2}'
+    aPattern = 'A[0-9]{1,2}'
+    if re.match(qPattern, message):
+        print("True")
+        return 0
+    elif re.match(aPattern, message):
+        print("False")
+        return 1
+    else:
+        return -1
 def startsWithAuthor(s):
     patterns = [
         '([\w]+):',
@@ -127,21 +109,10 @@ def startsWithDateTime(s):
         return True
     return False
 
-def plot_graph(time_groups, name):
-    plt.bar(range(len(time_groups)), list(
-        time_groups.values()), align='center')
-
-    plt.xticks(range(len(time_groups)), list(time_groups.keys()))
-
-    plt.xlabel('Time groups with 1 hour interval')
-    plt.ylabel('Frequency')
-    plt.title("Timing Analysis - Chat with {0}".format(name.capitalize()))
-    plt.grid(1)
-    plt.show()
-
 
 if __name__ == '__main__':
     parsedData = []
+    parsedData2 = []
     conversationPath = "WhatsApp Chat with Induction 20' Volunteers.txt"
     with open(conversationPath, encoding="utf-8") as fp:
         fp.readline()
@@ -154,19 +125,24 @@ if __name__ == '__main__':
             if not line:
                 break
             line = line.strip()
-            if startsWithDateTime(
-                    line):
+            if startsWithDateTime(line):
                 if len(messageBuffer) > 0:
-                    parsedData.append([date, time, author, ' '.join(
-                        messageBuffer)])
+                    value=typeOfMessage(' '.join(messageBuffer))
+                    if value==0:
+                        parsedData.append([date, time, author, ' '.join(messageBuffer)])
+                    elif value==1:
+                        parsedData2.append([date, time, author, ' '.join(messageBuffer)])
                 messageBuffer.clear()
                 date, time, author, message = getDataPoint(line)
                 messageBuffer.append(message)
             else:
-                messageBuffer.append(
-                    line)
+                messageBuffer.append(line)
     df = pd.DataFrame(parsedData, columns=['Date', 'Time', 'Author', 'Message'])
     df.head()
+    print(df)
+    df2 = pd.DataFrame(parsedData2, columns=['Date', 'Time', 'Author', 'Message'])
+    df2.head()
+    print(df2)
     desired_width = 320
     pd.set_option('display.width', desired_width)
     np.set_printoptions(linewidth=desired_width)
@@ -180,6 +156,6 @@ if __name__ == '__main__':
     authordf = df.loc[df['Author'] == author]
     value = str(authordf.iloc[-1].Message)
     print(value)
-    func(author,value)
+    #func(author,value)
 
 
