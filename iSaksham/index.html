@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>
+    iSaksham Submission Analysis Page
+  </title>
+  <script type="text/javascript">
+ function dynInput(cbox) {
+  if (cbox.checked) {
+    var input = document.createElement("input");
+    input.type = "text";
+    var div = document.createElement("div");
+    div.id = cbox.name;
+    div.innerHTML = "Enter Name of Person exactly as in your Whatsapp Contact."
+    div.appendChild(input);
+    document.getElementById("insertinputs").appendChild(div);
+  } else {
+    document.getElementById(cbox.name).remove();
+  }
+}
+</script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Sacramento&display=swap" rel="stylesheet">
+</head>
+
+
+<body>
+  <div class="top-container">
+    <img class="logoi" src="img/midas.jpg" alt="i-saksham">
+    <h1><span class="myname">iSaksham Submissions Analysis Platform</span>.</h1>
+    <h2> Submit your Exported Chat here. </h2>
+
+    <div class="dates">
+      <div class="file-loading">
+      <input id="input-b7" name="input-b7[]" multiple type="file" class="file" data-allowed-file-extensions='["txt"]'>
+      </div>
+      <br>
+    <label for="startdate">From Date</label>
+    <input type="date" name="startdate" id="startdate">
+    <label for="enddate">Till Date</label>
+    <input type="date" name="enddate" id="enddate">
+    <br><br>
+    <label class="container">All Students
+    <input type="checkbox" checked="checked">
+    <span class="checkmark"></span>
+  </label>
+
+  <label class="container">Individual
+    <input type="checkbox" name="check1" onclick="dynInput(this);"/>
+    <span class="checkmark"></span>
+  </label>
+  <p id="insertinputs"></p>
+  <br>
+      <a class="btn">Submit!</a>
+    </div>
+
+  </div>
+    <img class="logom" src="img/logo.png" alt="midas-iiitd">
+    <img id="work" src="img/work.png" alt="baseimage">
+
+  <div class="middle-container">
+    <div class="profile">
+      <img src="" alt="">
+      <h2 id="quote">“The secret of getting ahead is getting started.” – Mark Twain</h2>
+    </div>
+    <hr>
+    <div class="contact-me">
+      <h2>Get In Touch incase of any issues!</h2>
+      <h3>Dr. Rajiv Ratn Shah, IIIT Delhi</h3>
+      <p>+91-xxxxxxxxxx, iSaksham NGO, Chattisgarh, India</p>
+      <a class="btn" href="mailto:midas@iiitd.ac.in">Mail Us here!</a>
+    </div>
+  </div>
+
+
+  <div class="bottom-container">
+    <a class="footer-link" href="https://www.linkedin.com/">LinkedIn</a>
+    <a class="footer-link" href="https://twitter.com/">Twitter</a>
+    <a class="footer-link" href="https://www.i-saksham.org">Website</a>
+    <p class="copyrights">© 2021 Aryan Taneja & Gitansh Raj Satija. <br>Made with ❤️ in India.</p>
+  </div>
+</body>
+
+</html>
