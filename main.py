@@ -175,7 +175,7 @@ def startsWithDateTime(s):
     return False
 
 
-if _name_ == '_main_':
+if __name__ == '__main__':
     parsedData2 = []
     questions=[]
     authorsList ={}
