@@ -1,0 +1,265 @@
+body{
+  margin: 0;
+  text-align: center;
+    background-color: #eeeeee;
+}
+
+h1{
+  margin-top: 30px;
+  margin-bottom: 0;
+  color: #393e46;
+  font-size: 3.125rem;
+  font-family: 'Sacramento', cursive;
+  /*width: 30%;
+  margin : 0 auto 0 auto;
+  */
+}
+h2{
+  font-family: 'Montserrat', sans-serif;
+  color: #00adb5;
+
+}
+h3{
+  font-family: 'Montserrat', sans-serif;
+  color: #00adb5;
+}
+.copyrights{
+  font-family: monospace;
+  margin-top: 10px;
+  font-size: 8px;
+
+}
+p{
+  font-family: serif;
+  color: #393e46;
+  line-height: 1.5;
+}
+.top-container{
+  padding-bottom: 50px;
+  background-color: #eeeeee;
+  position: relative;
+  padding-top: 100px;
+}
+.coding{
+  border-radius: 10%;
+  width : 25%;
+  float: left;
+  margin-right: 30px;
+  margin-bottom: 30px;
+}
+.chilly{
+  border-radius: 10%;
+  width : 25%;
+  float: right;
+  margin-left: 30px;
+  margin-bottom: 30px;
+
+}
+
+.skill-row{
+  width: 50%;
+  margin : 100px auto 100px auto;
+  text-align: left;
+  line-height: 1.2;
+}
+
+/*.myname{
+  text-decoration: underline;
+}
+*/
+
+[type="date"] {
+  background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
+}
+[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+/* custom styles */
+.dates {
+  padding: 2em;
+  background: #e5e5e5;
+  font: 13px/1.4 Geneva, 'Lucida Sans', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+}
+label {
+  /* display: block; */
+  padding-left: 10px;
+  padding-right: 10px
+}
+#startdate {
+  border: 1px solid #c4c4c4;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 3px 5px;
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+  width: 190px;
+}
+#enddate {
+  border: 1px solid #c4c4c4;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 3px 5px;
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+  width: 190px;
+}
+
+.file-loading{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.logoi{
+  position: absolute;
+  right: 70px;
+  top: 30px;
+  height: 60px;
+  width: auto;
+}
+.bottom-container{
+  background-color: #aad8d3;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+}
+
+.contact-me{
+  background-color: #aad8d3;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+
+a{
+  margin: 20px 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: #393e46
+}
+a:hover{
+  color: #eeeeee
+}
+.btn {
+  background: #00adb5;
+  background-image: -webkit-linear-gradient(top, #00adb5, #aad8d3);
+  background-image: -moz-linear-gradient(top, #00adb5, #aad8d3);
+  background-image: -ms-linear-gradient(top, #00adb5, #aad8d3);
+  background-image: -o-linear-gradient(top, #00adb5, #aad8d3);
+  background-image: linear-gradient(to bottom, #00adb5, #aad8d3);
+  -webkit-border-radius: 26;
+  -moz-border-radius: 26;
+  border-radius: 26px;
+  text-shadow: 4px 1px 3px #705670;
+  -webkit-box-shadow: 2px 1px 3px #666666;
+  -moz-box-shadow: 2px 1px 3px #666666;
+  box-shadow: 2px 1px 3px #666666;
+  font-family: monospace;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #00adb5;
+  background-image: -webkit-linear-gradient(top, #00adb5, #000000);
+  background-image: -moz-linear-gradient(top, #00adb5, #000000);
+  background-image: -ms-linear-gradient(top, #00adb5, #000000);
+  background-image: -o-linear-gradient(top, #00adb5, #000000);
+  background-image: linear-gradient(to bottom, #00adb5, #000000);
+  text-decoration: none;
+}
+.logom{
+  right:  1200px;
+  top: 20px;
+  height: 70px;
+  width: auto;
+  position: absolute;
+}
+
+
+/* Customize the label (the container) */
+.container {
+  display: inline;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+#quote{
+  font-family: fantasy;
+  font-size: 2.5rem;
+  font-weight: bolder;
+  color: #aad8d3;
+}
+
+
+#work{
+  padding-top: 2px;
+  position: relative;
+  height: 150px;
+  width: auto;
+}
